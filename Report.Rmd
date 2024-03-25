@@ -1,0 +1,66 @@
+---
+title: "Final Project"
+author: "Shannon Cloherty"
+date: "2024-02-20"
+output: html_document
+---
+
+```{r, set-chunk-opts, echo = FALSE}
+library(knitr)
+opts_chunk$set(
+  echo = FALSE, warning = FALSE, message = FALSE
+)
+
+gesi <- readRDS(
+  here::here("output/gesi.rds")
+)
+
+pacman::p_load(readxl,
+               ggplot2,
+               dplyr,
+               ggfittext,
+               gtsummary)
+```
+
+# Introduction
+
+These data were collected in September 2023 during a primarily qualitative research study documenting and analyzing gender equality and social inclusion (GESI) in global water, sanitation, and hygiene (WASH) programs at an international NGO. 21 interviews were completed. Respondents were also asked to complete a survey. 14 surveys were completed.
+
+The dataset includes information on the number of WASH staff per country, the number who have been trained in GESI, the number of field staff, the number of national office staff, and the ratio of women to men working in both the field and the national office. Each country is a member of one of six regions designated by the NGO: Latin America & Caribbean, West Africa, Southern Africa, East Africa, Middle East & Eastern Europe, and Asia Pacific.
+
+The goal of this analysis is to determine if there are differences in number of people interviewed by region.
+
+# Table 1
+
+```{r, read in the table}
+table_one <- gesi %>%
+  select("region", "wash_staff_gesi_trained_percent", "wash_staff_field_percent_female", "wash_staff_no_percent_female", "gesi_budget") %>%
+  tbl_summary(by = region,
+              type = list(wash_staff_no_percent_female ~ "continuous"),
+              statistic = list(all_continuous() ~ "{mean} ({sd})",
+                               all_categorical() ~ "{n} / {N} ({p}%)"),
+              missing_text = "(Missing)",
+              label = list(wash_staff_gesi_trained_percent ~ "Percent of Staff Trained in GESI",
+                           wash_staff_field_percent_female ~ "Percent of Field Staff who are Female",
+                           wash_staff_no_percent_female ~ "Percent of National Office Staff who are Female",
+                           gesi_budget ~ "Do you have a budget for GESI?"))
+table_one
+```
+
+This table shows some summary statistics for selected variables. For continuous variables (Percent of Staff Trained in GESI, Percent of Field Staff who are Female, Percent of National Office Staff who are Female), the mean and standard deviation are shown. For the categorical variable of GESI budget, the number for each answer choice is shown along with the total number per region and the percentage. Missing variables represent the 7 countries who did not complete the survey.
+
+# Figure 1
+
+```{r, read in the figure}
+regions_factor <- readRDS(
+  here::here("output/regions_factor.rds")
+)
+
+figure <- readRDS(
+  here::here("output/figure.rds")
+)
+print(figure)
+```
+
+This figure shows the number of people interviewed per region. There were 21 interviews, 8 of which were individual and 13 of which were group. 
+There were `r sum(gesi$number_people_int)` people interviewed; `r sum(gesi$number_people_int_female)` were women and `r sum(gesi$number_people_int_male)` were men. The highest number of people interviewed per region was 12 people from 5 countries in Southern Africa. The lowest number of people interviewed per region was 5 people each from Middle East & Eastern Europe (from 2 countries) and Asia Pacific (from 3 countries).
