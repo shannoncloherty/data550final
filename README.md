@@ -24,9 +24,10 @@ Shannon Cloherty
     `03_render_report.R`
 
 ------------------------------------------------------------------------
+
 ## Generating the report
 
-In the `Makefile`, the code to "make Report.html" will render the report.
+In the `Makefile`, the code to `make Report.html` will render the report.
 
 The report contains information data that were collected in September 2023 
 during a primarily qualitative research study documenting and analyzing gender 
@@ -34,12 +35,14 @@ equality and social inclusion (GESI) in global water, sanitation, and hygiene
 (WASH) programs at an international NGO. The report contains information on WASH
 staff in different countries, gender ratio of staff per country, and the number
 of people interviewed per global region as designated by the NGO.
+
 ------------------------------------------------------------------------
 
 ## Package synchronization
 
-In the `Makefile`, the code to "make install" will restore the package versions
+In the `Makefile`, the code to `make install` will restore the package versions
 based on the lockfile `renv.lock`.
+
 ------------------------------------------------------------------------
 
 ## Data Dictionary
