@@ -36,6 +36,12 @@ staff in different countries, gender ratio of staff per country, and the number
 of people interviewed per global region as designated by the NGO.
 ------------------------------------------------------------------------
 
+## Package synchronization
+
+In the `Makefile`, the code to "make install" will restore the package versions
+based on the lockfile `renv.lock`.
+------------------------------------------------------------------------
+
 ## Data Dictionary
 
 id: interview number
