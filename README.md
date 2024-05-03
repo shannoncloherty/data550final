@@ -29,6 +29,9 @@ Shannon Cloherty
 
 In the `Makefile`, the code to `make Report.html` will render the report.
 
+In the `Makefile`, the code to `make final_project/Report.html` will render 
+the report in the containerized Docker image from Dockerhub.
+
 The report contains information data that were collected in September 2023 
 during a primarily qualitative research study documenting and analyzing gender 
 equality and social inclusion (GESI) in global water, sanitation, and hygiene
